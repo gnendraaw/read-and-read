@@ -1,0 +1,157 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,500;6..12,700&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem 0;
+  row-gap: 2rem;
+}
+
+.content .container {
+  width: 80vw;
+  max-width: 720px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+  padding: 16px;
+  flex-grow: 1;
+}
+
+.content .container .container-header {
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: .4rem 0 1rem 0;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #ddd;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  margin: 2rem 0 0 0;
+}
+
+.form .form-group {
+  display: flex;
+  flex-direction: column;
+  row-gap: .4rem;
+}
+
+.form .form-group label {
+  font-size: .8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.form .form-group input {
+  padding: .8rem;
+  border: 2px solid #ddd;
+  font-size: 1.2rem;
+}
+
+.form input[type=submit] {
+  border: 2px solid #202731;
+  background-color: #202731;
+  color: #fff;
+  padding: 1.2rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .2s all ease-in;
+}
+
+.form input[type=submit]:hover {
+  background-color: transparent;
+  color: #202731;
+}
+
+.list-item {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+}
+
+.book-card {
+  border: 2px solid #ddd;
+  padding: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.book-card .book-content {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  flex: 5;
+}
+
+.book-card .book-actions {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  flex: 2;
+}
+
+.book-card .title {
+  font-size: 2rem;
+}
+
+.btn {
+  padding: .8em 1rem;
+  border: none;
+  font-size: .8rem;
+  font-weight: 700;
+  background-color: #021E66;
+  color: #fff;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: .2s all ease-in-out;
+}
+
+.btn.btn-read {
+  background-color: #021E66;
+  border: 2px solid #021E66;
+}
+
+.btn.btn-read:hover {
+  background-color: transparent;
+  color: #021E66;
+}
+
+.btn.btn-remove {
+  border: 2px solid #F73668;
+  background-color: transparent;
+  color: #F73668;
+}
+
+.btn.btn-remove:hover {
+  background-color: #F73668;
+  color: #fff;
+}
+
+.btn.btn-unread {
+  background-color: #FF7F75;
+  border: 2px solid #FF7F75;
+}
+
+.btn.btn-unread:hover {
+  background-color: transparent;
+  color: #FF7F75;
+}
