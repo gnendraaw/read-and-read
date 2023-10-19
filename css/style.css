@@ -155,3 +155,21 @@ body {
   background-color: transparent;
   color: #FF7F75;
 }
+
+.search-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+}
+
+.search-wrapper label {
+  font-weight: 700;
+  font-size: .8rem;
+  text-transform: uppercase;
+}
+
+.search-bar {
+  padding: .8rem 1rem;
+  border: 2px solid #ddd;
+  font-size: 1.2rem;
+}

@@ -11,6 +11,11 @@ document.addEventListener("DOMContentLoaded", function () {
     addBook();
   });
 
+  const searchBar = document.getElementById("search");
+  searchBar.addEventListener("input", function () {
+    document.dispatchEvent(new Event(RENDER_EVENT));
+  });
+
   if (isStorageExists()) {
     loadDataFromLocalStorage();
   }
@@ -23,7 +28,18 @@ document.addEventListener(RENDER_EVENT, function () {
   const doneReadingListElement = document.getElementById("done-reading");
   doneReadingListElement.innerHTML = "";
 
-  for (book of books) {
+  let booksToRender = books;
+  let searchBarValue = document.getElementById("search").value;
+
+  if (searchBarValue) {
+    const filteredBooks = books.filter((book) =>
+      book.title.toLowerCase().includes(searchBarValue.toLowerCase())
+    );
+
+    booksToRender = filteredBooks;
+  } 
+
+  for (book of booksToRender) {
     const bookElement = makeBook(book);
     if (book.isCompleted) {
       doneReadingListElement.append(bookElement);
@@ -34,7 +50,7 @@ document.addEventListener(RENDER_EVENT, function () {
 });
 
 document.addEventListener(SAVED_EVENT, function () {
-  console.log('Changes saved!');
+  console.log("Changes saved!");
 });
 
 function saveData() {
