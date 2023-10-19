@@ -1,5 +1,7 @@
 const books = [];
 const RENDER_EVENT = "render-event";
+const SAVED_EVENT = "saved-event";
+const STORAGE_KEY = "READ_AND_READ";
 
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("form");
@@ -8,6 +10,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     addBook();
   });
+
+  if (isStorageExists()) {
+    loadDataFromLocalStorage();
+  }
 });
 
 document.addEventListener(RENDER_EVENT, function () {
@@ -27,6 +33,39 @@ document.addEventListener(RENDER_EVENT, function () {
   }
 });
 
+document.addEventListener(SAVED_EVENT, function () {
+  console.log('Changes saved!');
+});
+
+function saveData() {
+  if (!isStorageExists()) return;
+
+  const parsed = JSON.stringify(books);
+  localStorage.setItem(STORAGE_KEY, parsed);
+  document.dispatchEvent(new Event(SAVED_EVENT));
+}
+
+function isStorageExists() {
+  if (typeof Storage === "undefined") {
+    alert("Your browser doesn't support Local Storage");
+    return false;
+  }
+  return true;
+}
+
+function loadDataFromLocalStorage() {
+  const jsonData = localStorage.getItem(STORAGE_KEY);
+  const data = JSON.parse(jsonData);
+
+  if (data !== null) {
+    for (const book of data) {
+      books.push(book);
+    }
+  }
+
+  document.dispatchEvent(new Event(RENDER_EVENT));
+}
+
 function addBook() {
   const titleValue = document.getElementById("title").value;
   const authorValue = document.getElementById("author").value;
@@ -44,8 +83,7 @@ function addBook() {
 
   books.unshift(bookObject);
   document.dispatchEvent(new Event(RENDER_EVENT));
-
-  console.log(books);
+  saveData();
 }
 
 function generateId() {
@@ -82,10 +120,8 @@ function makeBook(bookObject) {
   const bookActionsElement = document.createElement("div");
   bookActionsElement.classList.add("book-actions");
 
-  const removeButtonElement = makeButton(
-    "remove",
-    "Remove",
-    () => removeBookFromList(bookObject.id)
+  const removeButtonElement = makeButton("remove", "Remove", () =>
+    removeBookFromList(bookObject.id)
   );
 
   if (bookObject.isCompleted) {
@@ -120,8 +156,7 @@ function makeBookReadFromList(id) {
 
   book.isCompleted = true;
   document.dispatchEvent(new Event(RENDER_EVENT));
-
-  console.log(books);
+  saveData();
 }
 
 function makeBookUnreadFromList(id) {
@@ -131,8 +166,7 @@ function makeBookUnreadFromList(id) {
 
   book.isCompleted = false;
   document.dispatchEvent(new Event(RENDER_EVENT));
-
-  console.log(books);
+  saveData();
 }
 
 function removeBookFromList(id) {
@@ -141,10 +175,8 @@ function removeBookFromList(id) {
   if (book === -1) return;
 
   books.splice(bookIndex, 1);
-  
   document.dispatchEvent(new Event(RENDER_EVENT));
-
-  console.log(books);
+  saveData();
 }
 
 function findBookIndexById(id) {
@@ -169,9 +201,7 @@ function makeButton(type, description, callback) {
   const buttonElement = document.createElement("button");
   buttonElement.innerText = description;
   buttonElement.classList.add("btn", `btn-${type}`);
-  buttonElement.addEventListener("click", function () {
-    callback();
-  });
+  buttonElement.addEventListener("click", callback);
 
   return buttonElement;
 }
