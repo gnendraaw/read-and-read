@@ -14,6 +14,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const searchBar = document.getElementById("search");
   searchBar.addEventListener("input", function () {
     document.dispatchEvent(new Event(RENDER_EVENT));
+  }); 
+
+  const popupCloseButton = document.getElementById("popup-close")
+  popupCloseButton.addEventListener('click', function () {
+    const popup = document.getElementById("popup");
+    popup.classList.remove('show');
   });
 
   if (isStorageExists()) {
@@ -50,7 +56,8 @@ document.addEventListener(RENDER_EVENT, function () {
 });
 
 document.addEventListener(SAVED_EVENT, function () {
-  console.log("Changes saved!");
+  const popup = document.getElementById("popup");
+  popup.classList.add("show");
 });
 
 function saveData() {

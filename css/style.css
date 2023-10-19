@@ -173,3 +173,40 @@ body {
   border: 2px solid #ddd;
   font-size: 1.2rem;
 }
+
+.popup {
+  display: none;
+  position: fixed;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  top: 1rem;
+  right: 1rem;
+  padding: .8rem;
+  background-color: #fff;
+  border: 2px solid #202731;
+  transition: .2s all ease-in-out;
+  z-index: 999;
+}
+
+.popup.show {
+  display: flex;
+}
+
+.popup .popup-content {
+  color: #202731;
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+.popup .popup-actions .popup-close {
+  background-color: #202731;
+  color: #fff;
+  font-weight: 700;
+  height: 2rem;
+  width: 2rem;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
